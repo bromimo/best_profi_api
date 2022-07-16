@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
-            $table->unsignedTinyInteger('id')->autoIncrement();
-            $table->string('title')->unique();
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
@@ -28,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['role_id']);
+            $table->dropForeign(['subject_id']);
+        });
     }
 };
