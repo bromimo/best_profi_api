@@ -15,4 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
     Route::post('signup', \App\Http\Controllers\Api\V1\Auth\SignupController::class);
+    Route::post('signin', \App\Http\Controllers\Api\V1\Auth\SigninController::class);
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('signout', \App\Http\Controllers\Api\V1\Auth\SignoutController::class);
+    });
 });

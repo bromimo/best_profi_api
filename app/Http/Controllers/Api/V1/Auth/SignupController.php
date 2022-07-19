@@ -14,8 +14,6 @@ class SignupController extends Controller
     {
         $data = $request->validated();
 
-        $this->signup($data);
-
-        return '111';
+        return $this->signup($data);
     }
 }
