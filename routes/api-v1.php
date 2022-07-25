@@ -20,3 +20,10 @@ Route::prefix('auth')->group(function () {
         Route::get('signout', \App\Http\Controllers\Api\V1\Auth\SignoutController::class);
     });
 });
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('journal')->group(function () {
+        Route::prefix('add')->group(function () {
+            Route::post('subject', \App\Http\Controllers\Api\V1\Journal\AddSubjectController::class);
+        });
+    });
+});

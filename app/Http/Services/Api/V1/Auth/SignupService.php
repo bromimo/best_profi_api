@@ -3,21 +3,18 @@
 namespace App\Http\Services\Api\V1\Auth;
 
 use App\Models\User;
-use App\Models\Subject;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
+use App\Http\Services\Api\V1\Journal\AddSubjectService;
 
 trait SignupService
 {
+    use AddSubjectService;
+
     public function signup(array $data)
     {
-        $subject = new Subject();
-
-        $subject->first_name = $data['first_name'];
-        $subject->last_name = $data['last_name'] ?? null;
-
-        $subject->save();
+        $subject = $this->addSubject($data);
 
         $user = new User();
 
