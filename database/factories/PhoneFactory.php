@@ -31,14 +31,13 @@ class PhoneFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
      * @return array<string, mixed>
      */
     public function definition()
     {
         return [
             'subject_id' => Subject::inRandomOrder()->first(),
-            'phone' => '+38' . $this->faker->unique()->numerify(
+            'phone'      => '+38' . $this->faker->unique()->numerify(
                     $this->faker->randomElement(self::MOBILE_CODES) . '#######'
                 ),
         ];
