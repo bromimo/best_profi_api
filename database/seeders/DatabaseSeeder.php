@@ -8,7 +8,6 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
      * @return void
      */
     public function run()
@@ -16,6 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SubjectSeeder::class,
             PhoneSeeder::class,
+            InstagramSeeder::class,
+            TelegramSeeder::class
         ]);
     }
 }
