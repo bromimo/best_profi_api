@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Subject;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
@@ -29,9 +28,9 @@ class SubjectController extends Controller
      */
     public function index(): JsonResource
     {
-        $subject = Subject::with('phones')->paginate($this->paginate);
+        $subjects = Subject::with('phones')->paginate($this->paginate);
 
-        return SubjectResource::collection($subject);
+        return SubjectResource::collection($subjects);
     }
 
     /**
