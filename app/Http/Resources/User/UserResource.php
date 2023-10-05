@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\User;
 
+use App\Http\Resources\Role\RoleResource;
 use App\Http\Resources\Subject\SubjectResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,7 +18,8 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'subject' => SubjectResource::make($this->subject)
+            'subject' => SubjectResource::make($this->subject),
+            'roles' => RoleResource::collection($this->roles)
         ];
     }
 }

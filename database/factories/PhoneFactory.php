@@ -2,11 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Phone;
 use App\Models\Subject;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Phone>
+ * @extends Factory<Phone>
  */
 class PhoneFactory extends Factory
 {
@@ -36,7 +37,7 @@ class PhoneFactory extends Factory
     public function definition()
     {
         return [
-            'subject_id' => Subject::inRandomOrder()->first(),
+            'subject_id' => Subject::notUsers()->inRandomOrder()->pluck('id')->first(),
             'phone'      => '+38' . $this->faker->unique()->numerify(
                     $this->faker->randomElement(self::MOBILE_CODES) . '#######'
                 ),
