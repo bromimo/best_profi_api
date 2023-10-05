@@ -13,6 +13,15 @@ class Phone extends Model
 
     protected $fillable = ['phone'];
 
+    /*
+    |--------------------------------------------------------------------------
+    | Отношения
+    |--------------------------------------------------------------------------
+    */
+
+    /** Субъект.
+     * @return BelongsTo
+     */
     public function subject(): BelongsTo
     {
         return $this->belongsTo(Subject::class);

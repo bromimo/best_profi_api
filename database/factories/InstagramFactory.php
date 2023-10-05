@@ -3,10 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\Subject;
+use App\Models\Instagram;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Instagram>
+ * @extends Factory<Instagram>
  */
 class InstagramFactory extends Factory
 {
@@ -16,7 +17,7 @@ class InstagramFactory extends Factory
      */
     public function definition()
     {
-        $subject_ids = Subject::pluck('id')->all();
+        $subject_ids = Subject::notUsers()->pluck('id');
 
         return [
             'subject_id' => $this->faker->unique()->randomElement($subject_ids),
