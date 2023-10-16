@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class User extends Authenticatable
 {
@@ -43,6 +44,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'role_user');
     }
 
+    /** Расписание.
+     * @return HasMany
+     */
+    public function schedule(): HasMany
+    {
+        return $this->hasMany(Schedule::class);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Фильтры
@@ -59,5 +68,23 @@ class User extends Authenticatable
         return $query->whereHas('subject.phones', function ($query) use ($phone) {
             $query->where('phone', $phone);
         });
+    }
+
+    /** Биндим 'me' в маршрут 'users'.
+     * @param mixed       $value
+     * @param string|null $field
+     * @return \Illuminate\Contracts\Auth\Authenticatable
+     */
+    public function resolveRouteBinding($value, $field = null)
+    {
+        if ($value === 'me') {
+            if (auth()->check()) {
+                return auth()->user();
+            }
+
+            throw new UnauthorizedHttpException('Unauthorized.');
+        }
+
+        return $this->findOrFail($value);
     }
 }

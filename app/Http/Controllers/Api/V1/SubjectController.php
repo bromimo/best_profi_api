@@ -9,8 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\SubjectService;
 use App\Http\Resources\Subject\SubjectResource;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Requests\Subject\StoreSubjectRequest;
-use App\Http\Requests\Subject\UpdateSubjectRequest;
+use App\Http\Requests\Subject\SubjectStoreRequest;
+use App\Http\Requests\Subject\SubjectUpdateRequest;
 
 class SubjectController extends Controller
 {
@@ -35,10 +35,10 @@ class SubjectController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param StoreSubjectRequest $request
+     * @param SubjectStoreRequest $request
      * @return JsonResource
      */
-    public function store(StoreSubjectRequest $request): JsonResource
+    public function store(SubjectStoreRequest $request): JsonResource
     {
         $subject = $this->service->store($request->validated());
 
@@ -57,11 +57,11 @@ class SubjectController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param UpdateSubjectRequest $request
+     * @param SubjectUpdateRequest $request
      * @param Subject              $subject
      * @return JsonResource
      */
-    public function update(UpdateSubjectRequest $request, Subject $subject): JsonResource
+    public function update(SubjectUpdateRequest $request, Subject $subject): JsonResource
     {
         $subject = $this->service->update($subject, $request->validated());
 

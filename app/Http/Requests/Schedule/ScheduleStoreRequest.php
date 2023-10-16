@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Schedule;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class ScheduleStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,10 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'subject_id' => ['required', 'exists:subjects,id'],
-            'password'   => ['required', 'string', 'min:8', 'confirmed'],
+            'schedule'          => ['required', 'array'],
+            'schedule.*.day'    => ['required', 'integer', 'between:0,6'],
+            'schedule.*.time'   => ['required', 'array'],
+            'schedule.*.time.*' => ['required', 'string', 'date_format:H:i:s']
         ];
     }
 }
