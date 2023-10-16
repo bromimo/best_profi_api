@@ -6,14 +6,14 @@ use App\Models\User;
 use App\Http\Services\AuthService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\Auth\SigninRequest;
+use App\Http\Requests\Auth\AuthSigninRequest;
 use App\Http\Resources\User\UserResource;
 
 class AuthController extends Controller
 {
     use AuthService;
 
-    public function signIn(SigninRequest $request)
+    public function signIn(AuthSigninRequest $request)
     {
         $data = $request->validated();
         $user = User::withPhone($data['phone'])->first();

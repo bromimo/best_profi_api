@@ -5,7 +5,7 @@ namespace App\Http\Requests\Subject;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSubjectRequest extends FormRequest
+class SubjectUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -22,7 +22,7 @@ class RequestTimer
         /** @var JsonResponse  $response */
         $response = $next($request);
         $content = json_decode($response->getContent(), true);
-        if ($content) {
+        if (is_array($content)) {
             $content['time'] = (microtime(true) - $timer) . ' сек.';
             $response->setContent(json_encode($content));
         }
